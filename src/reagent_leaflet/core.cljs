@@ -58,7 +58,7 @@
                  (fn [_ _ _ new-geometries]
                    (update-leaflet-geometries this new-geometries))))))
 
-(defn- leaflet-will-update [this old-state new-state]
+(defn- leaflet-did-update [this old-state new-state]
   (update-leaflet-geometries this (-> this reagent/state :mapspec :geometries deref)))
 
 (defn- leaflet-render [this]
@@ -125,6 +125,6 @@
   (reagent/create-class
     {:get-initial-state (fn [_] {:mapspec mapspec})
      :component-did-mount leaflet-did-mount
-     :component-will-update leaflet-will-update
+     :component-did-update leaflet-did-update
      :render leaflet-render}))
 
