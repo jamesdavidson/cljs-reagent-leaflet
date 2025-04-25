@@ -1,7 +1,8 @@
-(ns reagent-leaflet.example
-  (:require [reagent.core :as reagent :refer [atom]]
-            [reagent-leaflet.core :refer [leaflet]]
-            [figwheel.client :as fw :include-macros true]))
+(ns ^:figwheel-hooks reagent-leaflet.example
+  (:require [reagent.core :as reagent]
+            [reagent.dom :as rdom]
+            [goog.dom :as gdom]
+            [reagent-leaflet.core :refer [leaflet]]))
 
 (defonce state
   (reagent/atom
@@ -21,7 +22,7 @@
 (def zoom-level (reagent/cursor state [:zoom-level]))
 
 (defn demo []
-  (let [drawing (atom false)]
+  (let [drawing (reagent/atom false)]
     (fn []
     [:span
      [leaflet {:id "kartta"
@@ -85,10 +86,18 @@
    ])))
 
 
+(defn get-app-element []
+  (gdom/getElement "example-app"))
+
+(defn mount [el]
+  (rdom/render [demo] el))
+
+(defn mount-app-element []
+  (when-let [el (get-app-element)]
+    (mount el)))
+
+(defn ^:after-load on-reload []
+  (mount-app-element))
 
 (defn ^:export main []
-  (reagent/render-component [demo] (.getElementById js/document "example-app")))
-
-(fw/watch-and-reload
-  ;; :websocket-url "ws://localhost:3449/figwheel-ws" default
-  :jsload-callback (fn [] (main))) ;; optional callback
+  (mount-app-element))

@@ -1,0 +1,5 @@
+^{:watch-dirs ["src"]
+   }
+{:main reagent-leaflet.example
+ :foreign-libs []
+ :externs ["externs.js"]}

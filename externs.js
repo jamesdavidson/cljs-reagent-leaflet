@@ -1,0 +1,14 @@
+var L = {};
+L.addTo = function () {};
+L.map = {};
+L.map.setView = function () {};
+L.map.setZoom = function () {};
+L.map.on = function () {};
+L.tileLayer = {};
+L.tileLayer.wms = function () {};
+L.polygon = {};
+L.polygon.addTo = function () {};
+L.polyline = {};
+L.polyline.addTo = function () {};
+L.circle = {};
+L.circle.addTo = function () {};

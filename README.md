@@ -8,7 +8,7 @@ Demo at http://webjure.org/reagent-leaflet/ (see example.cljs for the code).
 
 ## Running locally ##
 
-Clone this repo and run: lein figwheel example
+Clone this repo and run: clojure -M:fig:build
 
 ## TODO ##
 
