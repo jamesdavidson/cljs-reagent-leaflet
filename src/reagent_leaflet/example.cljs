@@ -3,18 +3,22 @@
             [reagent-leaflet.core :refer [leaflet]]
             [figwheel.client :as fw :include-macros true]))
 
+(defonce state
+  (reagent/atom
+   {:geometries [{:type :polygon
+                  :coordinates [[65.1 25.2]
+                                [65.15 25.2]
+                                [65.125 25.3]]}
+                {:type :line
+                  :coordinates [[65.3 25.0]
+                                [65.4 25.5]]}]
+    :view-position [65.1 25.2]
+    :zoom-level 8}))
+
 ;; Define geometries that are drawn on the map.
-(def geometries (atom [{:type :polygon
-                        :coordinates [[65.1 25.2]
-                                      [65.15 25.2]
-                                      [65.125 25.3]]}
-
-                       {:type :line
-                        :coordinates [[65.3 25.0]
-                                      [65.4 25.5]]}]))
-
-(def view-position (atom [65.1 25.2]))
-(def zoom-level (atom 8))
+(def geometries (reagent/cursor state [:geometries]))
+(def view-position (reagent/cursor state [:view-position]))
+(def zoom-level (reagent/cursor state [:zoom-level]))
 
 (defn demo []
   (let [drawing (atom false)]
